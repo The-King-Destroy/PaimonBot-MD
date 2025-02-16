@@ -26,7 +26,7 @@ global.owner = [
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.mods = ['']
+global.mods = []
 global.suittag = ['584120346669']
 global.prems = []
 
@@ -35,7 +35,7 @@ global.prems = []
 global.libreria = 'Baileys'
 global.baileys = 'V 6.7.9' 
 global.languaje = 'Español'
-global.vs = '2.2.0'
+global.vs = '1.0.0'
 global.vsJB = '5.0'
 global.nameqr = 'PaimonBot-MD'
 global.namebot = 'קคเ๓๏ภ๒๏Շ-๓๔'
@@ -54,7 +54,7 @@ global.etiqueta = 'ⁱᵃᵐ|𝔇ĕ𝐬†𝓻⊙γ𒆜'
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.moneda = 'Yenes'
+global.moneda = 'Bitcoin'
 global.welcom1 = '❍ Edita Con #setwelcome'
 global.welcom2 = '❍ Edita Con #setbye'
 global.banner = 'https://qu.ax/YjtKs.jpg'
