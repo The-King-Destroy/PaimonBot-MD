@@ -3,6 +3,7 @@ let handler = async (m, { conn, usedPrefix, isRowner}) => {
 let _muptime
 let totalreg = Object.keys(global.db.data.users).length
 let totalchats = Object.keys(global.db.data.chats).length
+let pp = "https://qu.ax/iNraU.jpg"
 if (process.send) {
 process.send('uptime')
 _muptime = await new Promise(resolve => {
@@ -19,18 +20,17 @@ let old = performance.now()
 let neww = performance.now()
 let speed = neww - old
 const used = process.memoryUsage()
-let info = `ᥫ᭡ Información - ${botname} ❀\n`
-info += `ᰔᩚ  *◜Creador◞* ⇢ ${etiqueta}\n`
-info += `🜸  *◜Prefijo◞* ⇢ [ ${usedPrefix} ]\n`
-info += `✧  *◜Versión◞* ⇢ ${vs}\n`
-info += `❖  *◜Chats Privados◞* ⇢ ${chats.length - groupsIn.length}\n`
-info += `✎  *◜Total De Chats◞* ⇢ ${chats.length}\n`
-info += `❍  *◜Usuarios◞* ⇢ ${totalreg}\n`
-info += `❑  *◜Grupos◞* ⇢ ${groupsIn.length}\n`
-info += `✰  *◜Actividad◞* ⇢ ${muptime}\n`
-info += `ⴵ  *◜Velocidad◞* ⇢ ${(speed * 1000).toFixed(0) / 1000}\n`
-info += `✦  *◜Sub-Bots Activos◞* ⇢ ${totalUsers || '0'}`
-await conn.sendFile(m.chat, avatar, 'estado.jpg', info, fkontak)
+let yuki = `\`\`\`Información - ${botname}\`\`\`\n`
+yuki += `👑꙰᠁❥ *◜Creador◞* ⇢ 𝔇ĕ𝐬†𝓻⊙γ𒆜\n`
+yuki += `⚜️꙰᠁❥ *◜Prefijo◞* ⇢ [ ${usedPrefix} ]\n`
+yuki += `📚꙰᠁❥ *◜Versión◞* ⇢ ${vs}\n`
+yuki += `🔐꙰᠁❥ *◜Chats Privados◞* ⇢ ${chats.length - groupsIn.length}\n`
+yuki += `💬꙰᠁❥ *◜Total De Chats◞* ⇢ ${chats.length}\n`
+yuki += `👥꙰᠁❥ *◜Usuarios◞* ⇢ ${totalreg}\n`
+yuki += `📌꙰᠁❥ *◜Grupos◞* ⇢ ${groupsIn.length}\n`
+yuki += `⏱️꙰᠁❥ *◜Actividad◞* ⇢ ${muptime}\n`
+yuki += `🚀꙰᠁❥ *◜Velocidad◞* ⇢ ${(speed * 1000).toFixed(0) / 1000}\n`
+await conn.sendFile(m.chat, pp, 'yuki.jpg', yuki, fkontak)
 }
 handler.help = ['estado']
 handler.tags = ['info']
