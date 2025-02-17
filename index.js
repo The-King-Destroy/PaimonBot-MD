@@ -7,7 +7,7 @@ import {createRequire} from 'module'
 import {fileURLToPath, pathToFileURL} from 'url'
 import {platform} from 'process'
 import * as ws from 'ws'
-import {readdirSync, statSync, unlinkSync, existsSync, readFileSync, rmSync, watch} from 'fs'
+import fs, {readdirSync, statSync, unlinkSync, existsSync, mkdirSync, readFileSync, rmSync, watch} from 'fs'
 import yargs from 'yargs';
 import {spawn} from 'child_process'
 import lodash from 'lodash'
@@ -165,7 +165,7 @@ const filterStrings = [
 "RGVjcnlwdGVkIG1lc3NhZ2U=" // "Decrypted message" 
 ]
 
-console.info = () => {} 
+/*console.info = () => {} 
 console.debug = () => {} 
 ['log', 'warn', 'error'].forEach(methodName => redefineConsoleMethod(methodName, filterStrings))
 
@@ -189,7 +189,29 @@ msgRetryCounterCache, // Resolver mensajes en espera
 msgRetryCounterMap, // Determinar si se debe volver a intentar enviar un mensaje o no
 defaultQueryTimeoutMs: undefined,
 version: [2, 3000, 1015901307],
-}
+}*/
+
+const connectionOptions = {
+logger: pino({ level: 'silent' }),
+printQRInTerminal: opcion == '1' ? true : methodCodeQR ? true : false,
+mobile: MethodMobile, 
+browser: opcion == '1' ? [`${nameqr}`, 'Edge', '20.0.04'] : methodCodeQR ? [`${nameqr}`, 'Edge', '20.0.04'] : ["Ubuntu", "Chrome", "20.0.04"],
+auth: {
+creds: state.creds,
+keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" })),
+},
+markOnlineOnConnect: true,
+generateHighQualityLinkPreview: true,
+getMessage: async (clave) => {
+let jid = jidNormalizedUser(clave.remoteJid);
+let msg = await store.loadMessage(jid, clave.id);
+return msg?.message || "";
+},
+msgRetryCounterCache,
+msgRetryCounterMap,
+defaultQueryTimeoutMs: undefined,
+version: [2, 3000, 1015901307]
+};
 
 global.conn = makeWASocket(connectionOptions);
 
