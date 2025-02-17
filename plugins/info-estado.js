@@ -36,7 +36,7 @@ let handler = async (m, { conn, usedPrefix, isRowner }) => {
     info += `✎  *◜Total De Chats◞* ⇢ ${chats.length}\n`;
     info += `❍  *◜Usuarios◞* ⇢ ${totalreg}\n`;
     info += `❑  *◜Grupos◞* ⇢ ${groupsIn.length}\n`;
-    info += `✰  *◜Actividad◞* ⇢ ${muptime}\n`;
+    info += `✰  *◜Actividad◞* ⇢ ${uptime}\n`;
     info += `ⴵ  *◜Velocidad◞* ⇢ ${(speed * 1000).toFixed(0) / 1000}\n`;
     info += `✦  *◜Sub-Bots Activos◞* ⇢ ${totalUsers || '0'}`;
 
@@ -51,8 +51,8 @@ handler.register = true;
 export default handler;
 
 function clockString(ms) {
-    let h = Math.floor(ms / 3600000);
-    let m = Math.floor(ms / 60000) % 60;
-    let s = Math.floor(ms / 1000) % 60;
-    return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':');
+    let seconds = Math.floor((ms / 1000) % 60);
+    let minutes = Math.floor((ms / (1000 * 60)) % 60);
+    let hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
+    return `${hours}h ${minutes}m ${seconds}s`;
 }
