@@ -1,42 +1,33 @@
+global.play = {};
 import yts from 'yt-search';
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) throw `${emoji} Por favor ingresa la música que deseás descargar.`;
-
+  
   const isVideo = /vid|2|mp4|v$/.test(command);
   const search = await yts(text);
-
+  
   if (!search.all || search.all.length === 0) {
     throw "No se encontraron resultados para tu búsqueda.";
   }
-
+  
   const videoInfo = search.all[0];
   const body = `「✦」ძᥱsᥴᥲrgᥲᥒძ᥆ *<${videoInfo.title}>*\n\n> ✦ ᥴᥲᥒᥲᥣ » *${videoInfo.author.name || 'Desconocido'}*\n*°.⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸.°*\n> ✰ ᥎іs𝗍ᥲs » *${videoInfo.views}*\n*°.⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸.°*\n> ⴵ ძᥙrᥲᥴі᥆ᥒ » *${videoInfo.timestamp}*\n*°.⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸.°*\n> ✐ ⍴ᥙᑲᥣіᥴᥲძ᥆ » *${videoInfo.ago}*\n*°.⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸⎯ܴ⎯̶᳞͇ࠝ⎯⃘̶⎯̸.°*\n> 🜸 ᥣіᥒk » ${videoInfo.url}\n`;
 
+  if (Object.keys(global.play).length >= 100) global.play = {};
+
     if (command === 'play' || command === 'play2' || command === 'playvid') {
-  await conn.sendMessage(m.chat, {
-      image: { url: videoInfo.thumbnail },
-      caption: body,
-      footer: dev,
-      buttons: [
-        {
-          buttonId: `.ytmp3 ${videoInfo.url}`,
-          buttonText: {
-            displayText: 'ᯓᡣ𐭩 ᥲᥙძі᥆',
-          },
-        },
-        {
-          buttonId: `.ytmp4 ${videoInfo.url}`,
-          buttonText: {
-            displayText: 'ᯓᡣ𐭩 ᥎іძᥱ᥆',
-          },
-        },
-      ],
-      viewOnce: true,
-      headerType: 4,
-    }, { quoted: fkontak });
-    m.react('🕒');
-    
+      let msg = await conn.sendMessage(m.chat, {
+        image: { url: videoInfo.thumbnail },
+        caption: body,
+        mentions: [m.sender]
+      }, {
+        quoted: fkontak
+      });
+      
+      //await conn.sendMessage(m.chat, { image: { url: videoInfo.thumbnail }, caption: body, footer: dev, buttons: [{ buttonId: `.ytmp3 ${videoInfo.url}`, buttonText: { displayText: 'ᯓᡣ𐭩 ᥲᥙძі᥆', }, }, { buttonId: `.ytmp4 ${videoInfo.url}`, buttonText: { displayText: 'ᯓᡣ𐭩 ᥎іძᥱ᥆', }, }, ], viewOnce: true, headerType: 4, }, { quoted: fkontak });
+      m.react('🕒');
+      global.play[msg.key.id] = { url: videoInfo.url };
     } else if (command === 'yta' || command === 'ytmp3') {
     m.react(rwait)
       //let audio = await (await fetch(`https://dark-core-api.vercel.app/api/download/ytmp3?url=${videoInfo.url}&type=audio`)).buffer()
