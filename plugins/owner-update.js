@@ -1,19 +1,29 @@
-let handler = async (m, { conn, usedPrefix, command }) => {
+import { exec } from 'child_process';
 
-    try {
-        m.reply('「✦」Reiniciando El Bot....')
-        setTimeout(() => {
-            process.exit(0)
-        }, 3000) 
-    } catch (error) {
-        console.log(error)
-        conn.reply(m.chat, `⚠︎ Ocurrió un error. ${error}`, m)
+let handler = async (m, { conn }) => {
+  m.reply(`❍ Actualizando el bot, espere un momento...`);
+
+  exec('git pull', (err, stdout, stderr) => {
+    if (err) {
+      conn.reply(m.chat, `⚠︎ Error: No se pudo realizar la actualización.\nRazón: ${err.message}`, m);
+      return;
     }
-}
 
-handler.help = ['restart']
-handler.tags = ['owner']
-handler.command = ['restart', 'reiniciar'] 
-handler.rowner = true
+    if (stderr) {
+      console.warn('Advertencia durante la actualización:', stderr);
+    }
 
-export default handler
+    if (stdout.includes('Already up to date.')) {
+      conn.reply(m.chat, `❀ El bot ya está actualizado.`, m);
+    } else {
+      conn.reply(m.chat, `❀ Actualización realizada con éxito.\n\n${stdout}`, m);
+    }
+  });
+};
+
+handler.help = ['update'];
+handler.tags = ['owner'];
+handler.command = ['update'];
+handler.rowner = true;
+
+export default handler;
