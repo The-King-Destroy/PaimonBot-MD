@@ -106,7 +106,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
       await conn.sendMessage(m.chat, { audio: { url: result }, mimetype: "audio/mpeg" }, { quoted: m });
 
     } else if (command === 'play2' || command === 'ytv' || command === 'ytmp4') {
-      const json = await (await fetch(`https://delirius-apiofc.vercel.app/download/ytmp4v2?url=${url}`)).json()
+      const json = await (await fetch(`https://dark-core-api.vercel.app/api/download/ytmp4?key=api&url=${url}`)).json()
       const downloadUrl = json.data.file_url;
 
       try {
@@ -134,7 +134,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
 handler.command = handler.help = ['play', 'play2', 'ytmp3', 'yta', 'ytmp4', 'ytv'];
 handler.tags = ['downloader'];
-handler.group = true;
+//handler.group = true;
 
 export default handler;
 
