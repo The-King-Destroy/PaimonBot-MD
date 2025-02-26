@@ -24,7 +24,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
           previewType: 0,
           mediaUrl: url,
           sourceUrl: url,
-          thumbnail: thumb,
+          thumbnail: thumbnail,
           renderLargerThumbnail: true,
         },
       },
