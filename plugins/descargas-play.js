@@ -144,4 +144,4 @@ function formatViews(views) {
   } else {
     return views.toString();
   }
-  }
+}
