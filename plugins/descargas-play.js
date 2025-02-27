@@ -124,9 +124,9 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
         console.error(`Error con la fuente de descarga:`, e.message);
       }
 
-      if (!downloadUrl) {
-        return m.reply(`⚠︎ *No se pudo descargar el video:* No se encontró un enlace de descarga válido.`);
-      }
+      //if (!downloadUrl) {
+       // return m.reply(`⚠︎ *No se pudo descargar el video:* No se encontró un enlace de descarga válido.`);
+     // }
     } else {
       throw "Comando no reconocido.";
     }
