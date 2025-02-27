@@ -102,20 +102,23 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
     if (command === 'play' || command === 'yta' || command === 'ytmp3') {
       const api = await (await fetch(`https://api.neoxr.eu/api/youtube?url=${url}&type=audio&quality=128kbps&apikey=GataDios`)).json()
-      const result = api.data.url;
+      const result = api.data.url
       await conn.sendMessage(m.chat, { audio: { url: result }, mimetype: "audio/mpeg" }, { quoted: m });
 
     } else if (command === 'play2' || command === 'ytv' || command === 'ytmp4') {
-      const json = await (await fetch(`https://dark-core-api.vercel.app/api/download/ytmp4?key=api&url=${url}`)).json()
-      const downloadUrl = json.data.file_url;
+      
+      const response = await fetch(`https://api.neoxr.eu/api/youtube?url=${url}&type=video&quality=480p&apikey=GataDios`)
+      const json = await response.json()
+      //const json = await (await fetch(`https://dark-core-api.vercel.app/api/download/ytmp4?key=api&url=${url}`)).json()
+      //const downloadUrl = json.data.file_url
 
       try {
         await conn.sendMessage(m.chat, {
-          video: { url: downloadUrl },
-          fileName: `${title}.mp4`,
+          video: { url: json.data.url },
+          fileName: json.data.filename,
           mimetype: 'video/mp4',
-          caption: ``,
-          thumbnail: thumb
+          caption: '',
+          thumbnail: json.thumbnail
         }, { quoted: m });
       } catch (e) {
         console.error(`Error con la fuente de descarga:`, e.message);
