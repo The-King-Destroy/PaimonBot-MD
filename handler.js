@@ -72,8 +72,6 @@ if (!('premium' in user))
 user.premium = false
 if (!user.premium)
 user.premiumTime = 0
-if (!('registered' in user))
-user.registered = false
 if (!('genre' in user))
 user.genre = ''
 if (!('birth' in user))
@@ -125,7 +123,6 @@ lastpago: 0,
 lastmining: 0,
 lastcodereg: 0,
 muto: false,
-registered: false,
 genre: '',
 birth: '',
 marry: '',
@@ -435,10 +432,6 @@ if (plugin.private && m.isGroup) {
 fail('private', m, this)
 continue
 }
-if (plugin.register == true && _user.registered == false) { 
-fail('unreg', m, this)
-continue
-}
 m.isCommand = true
 let xp = 'exp' in plugin ? parseInt(plugin.exp) : 17 
 if (xp > 200)
@@ -603,7 +596,6 @@ group: `『✦』El comando *${comando}* solo puede ser usado en grupos.`,
 private: `『✦』El comando *${comando}* solo puede ser usado al chat privado del bot.`,
 admin: `『✦』El comando *${comando}* solo puede ser usado por los administradores del grupo.`, 
 botAdmin: `『✦』Para ejecutar el comando *${comando}* debo ser administrador del grupo.`,
-unreg: `『✦』El comando *${comando}* solo puede ser usado por los usuarios registrado, registrate usando:\n> » #${verifyaleatorio} ${user2}.${edadaleatoria}`,
 restrict: `『✦』Esta caracteristica está desactivada.`
 }[type];
 if (msg) return m.reply(msg).then(_ => m.react('✖️'))}
